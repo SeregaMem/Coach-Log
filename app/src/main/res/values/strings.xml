@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Журнал тренера</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Имя владельца аккаунта</string>
+    <string name="nav_header_subtitle">какое-либо описание</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Настройки</string>
+
+
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="btn_add_athletes">добавить спортсмена</string>
+
+    <string name="tv_fio">ФИО</string>
+    <string name="et_enter_fio">Введите фио</string>
+
+    <string name="tv_phone_number">Номер телефона</string>
+    <string name="et_enter_phone_number">Введите номер телефона</string>
+
+    <string name="tv_bday">Дата рождения</string>
+    <string name="et_enter_bday">Введите дату рождения</string>
+
+    <string name="btn_create_new_athlete">Создать</string>
+
+    <string name="menu_time_table">Расписание</string>
+    <string name="menu_athletes">Спортсмены</string>
+    <string name="athletes_aditor">Редактирование спортсмена</string>
+
+    <string name="tv_training_description">Описание тренировки</string>
+    <string name="tv_athletes_amount">Количесво спортсменов:</string>
+    <string name="btn_add_time_table">добавить</string>
+    <string name="training_details_info">Инфо</string>
+    <string name="training_details_lessons">Тренировки</string>
+    <string name="training_details_pay">Абонементы</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
