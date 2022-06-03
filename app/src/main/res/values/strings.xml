@@ -7,9 +7,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Настройки</string>
 
-
-    <string name="menu_slideshow">Slideshow</string>
-
     <string name="btn_add_athletes">добавить спортсмена</string>
 
     <string name="tv_fio">ФИО</string>
@@ -33,6 +30,7 @@
     <string name="training_details_info">Инфо</string>
     <string name="training_details_lessons">Тренировки</string>
     <string name="training_details_pay">Абонементы</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="menu_timer">Таймер</string>
+    <string name="menu_statistic">Статистика</string>
 </resources>
