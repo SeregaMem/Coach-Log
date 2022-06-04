@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new;
+package com.sjproject.coach_log_new.ui.athletes.info;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -18,7 +18,7 @@
             android:exported="false"
             android:label="Информация о спортсмене"/>
         <activity
-            android:name=".TrainingAdapterActivity"
+            android:name=".ui.timetable.TrainingAdapterActivity"
             android:exported="false"
             android:label="Редактирование тренировки"/>
         <activity

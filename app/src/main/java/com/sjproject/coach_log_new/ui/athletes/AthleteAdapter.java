@@ -1,6 +1,7 @@
 package com.sjproject.coach_log_new.ui.athletes;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,18 @@ import com.sjproject.coach_log_new.R;
 
 public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.AthleteViewHolder> {
 
+    String LOG_TAG = "myLOG";
     private int countItems;
 
     public AthleteAdapter(int athletesCount) {
+        Log.d(LOG_TAG, "AthleteAdapter IN");
         countItems = athletesCount;
     }
 
     @NonNull
     @Override
     public AthleteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(LOG_TAG, "onCreateViewHolder IN");
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.item_athlete;
 
@@ -35,13 +39,14 @@ public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.AthleteV
 
     @Override
     public void onBindViewHolder(@NonNull AthleteViewHolder holder, int position) {
-        holder.bindName(position);
-        holder.bindBday(position);
+        Log.d(LOG_TAG, "onBindViewHolder IN");
+        // отрисовка
     }
 
     @Override
     public int getItemCount() {
-        return countItems;
+        Log.d(LOG_TAG, "getItemCount IN");
+        return 100;
     }
 
     class AthleteViewHolder extends RecyclerView.ViewHolder {
@@ -51,16 +56,10 @@ public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.AthleteV
         public AthleteViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            Log.d(LOG_TAG, "AthleteViewHolder IN");
+
             athleteNameView = (TextView) itemView.findViewById(R.id.tv_athleteName);
             athletebdayView = (TextView) itemView.findViewById(R.id.tv_athlete_bday);
-        }
-
-        void bindName(int idName) {
-            athleteNameView.setText(idName);
-        }
-
-        void bindBday(int idBday) {
-            athletebdayView.setText(idBday);
         }
     }
 }

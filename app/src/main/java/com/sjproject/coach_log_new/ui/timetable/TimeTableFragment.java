@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sjproject.coach_log_new.DBHelper;
-import com.sjproject.coach_log_new.TrainingAdapterActivity;
 import com.sjproject.coach_log_new.databinding.FragmentTimeTableBinding;
 
 public class TimeTableFragment extends Fragment {

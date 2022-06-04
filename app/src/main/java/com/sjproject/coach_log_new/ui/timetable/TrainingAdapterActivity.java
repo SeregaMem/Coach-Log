@@ -1,6 +1,5 @@
-package com.sjproject.coach_log_new;
+package com.sjproject.coach_log_new.ui.timetable;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
@@ -18,6 +17,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sjproject.coach_log_new.DBHelper;
+import com.sjproject.coach_log_new.R;
 
 import java.util.Calendar;
 

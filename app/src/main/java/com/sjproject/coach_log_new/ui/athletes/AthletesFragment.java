@@ -61,7 +61,7 @@ public class AthletesFragment extends Fragment {
 
         db = dbHelper.getReadableDatabase();
 
-        RecyclerView rvAthletes = binding.rvAthletes;
+        RecyclerView rvAthletes = binding.rvAthletesList;
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvAthletes.setLayoutManager(layoutManager);
@@ -71,8 +71,6 @@ public class AthletesFragment extends Fragment {
         athleteAdapter = new AthleteAdapter(getAthletesCount());
 
         rvAthletes.setAdapter(athleteAdapter);
-
-
 
 
         /* Cursor c = db.query("athletesTable", null, null, null,
