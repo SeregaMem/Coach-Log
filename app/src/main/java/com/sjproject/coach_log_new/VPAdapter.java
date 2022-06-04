@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.sjproject.coach_log_new.ui.athletes.AthleteINFOFragment;
-import com.sjproject.coach_log_new.ui.athletes.AthleteSubscriptionINFO;
-import com.sjproject.coach_log_new.ui.athletes.AthleteTrainingINFOFragment;
+import com.sjproject.coach_log_new.ui.athletes.info.AthleteINFOFragment;
+import com.sjproject.coach_log_new.ui.athletes.info.AthleteSubscriptionINFO;
+import com.sjproject.coach_log_new.ui.athletes.info.AthleteTrainingINFOFragment;
 
 public class VPAdapter extends FragmentStateAdapter {
 

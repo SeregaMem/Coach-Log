@@ -1,21 +1,19 @@
 package com.sjproject.coach_log_new.ui.athletes;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.AddAthletesActivity;
 import com.sjproject.coach_log_new.DBHelper;
 import com.sjproject.coach_log_new.databinding.FragmentAthletesBinding;
 
@@ -23,8 +21,10 @@ public class AthletesFragment extends Fragment {
 
     private FragmentAthletesBinding binding;
 
-    private DBHelper dbHelper;
+    private static DBHelper dbHelper;
     private SQLiteDatabase db;
+
+    private AthleteAdapter athleteAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,10 +61,21 @@ public class AthletesFragment extends Fragment {
 
         db = dbHelper.getReadableDatabase();
 
-        LinearLayout llathletes = binding.mainll;
-        llathletes.removeAllViews();
+        RecyclerView rvAthletes = binding.rvAthletes;
 
-        Cursor c = db.query("athletesTable", null, null, null,
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rvAthletes.setLayoutManager(layoutManager);
+
+        rvAthletes.setHasFixedSize(true);
+
+        athleteAdapter = new AthleteAdapter(getAthletesCount());
+
+        rvAthletes.setAdapter(athleteAdapter);
+
+
+
+
+        /* Cursor c = db.query("athletesTable", null, null, null,
                 null, null, null);
 
         if (c.moveToFirst()) {
@@ -87,12 +98,19 @@ public class AthletesFragment extends Fragment {
                         startActivity(new Intent(getActivity(), AthleteDetails.class));
                     }
                 });
-                llathletes.addView(btnNew);
+                rvAthletes.addView(btnNew);
             } while (c.moveToNext());
         }
 
         c.close();
 
-        dbHelper.close();
+        dbHelper.close(); */
+    }
+
+    public static int getAthletesCount () {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int count = (int) DatabaseUtils.queryNumEntries(db, "athletesTable");
+        db.close();
+        return count;
     }
 }

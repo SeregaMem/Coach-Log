@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.athletes.AthleteTrainingINFOFragment">
+    tools:context=".ui.athletes.info.AthleteTrainingINFOFragment">
 
     <TextView
         android:id="@+id/tv_no_training"
