@@ -88,11 +88,11 @@ public class AddAthletesActivity extends AppCompatActivity implements View.OnCli
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        cv.put("athlete_name", name);
-        cv.put("phoneNumber", phone_number);
-        cv.put("bday", bday);
+        cv.put(DBHelper.KEY_NAME, name);
+        cv.put(DBHelper.KEY_PHONE, phone_number);
+        cv.put(DBHelper.KEY_DATA, bday);
 
-        db.insert("athletesTable", null, cv);
+        db.insert(DBHelper.TABLE_NAME_ATHLETE, null, cv);
 
         dbHelper.close();
     }

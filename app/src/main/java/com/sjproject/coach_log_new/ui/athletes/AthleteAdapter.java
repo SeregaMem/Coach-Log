@@ -15,113 +15,66 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sjproject.coach_log_new.DBHelper;
 import com.sjproject.coach_log_new.R;
 
+import java.util.List;
 
-public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.AthleteViewHolder> {
+
+public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.ViewHolder> {
 
     String LOG_TAG = "myLog";
+    Context context;
 
-    int moveToFirstCount = 0;
+    List<Athletes> athletesList;
+    RecyclerView rvAthletes;
+    final View.OnClickListener onClickListener = new myOnClickListener();
 
-    private int countItems;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_name, tv_bday;
 
-    private Context parent;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_athleteName);
+            tv_bday = (TextView) itemView.findViewById(R.id.tv_athlete_bday);
+        }
+    }
 
-    DBHelper dbHelper;
-    SQLiteDatabase db;
-    Cursor c;
 
-    int nameColIndex = 1;
-    int bdayColIndex = 3;
-    String name;
-    String bday;
 
-    public AthleteAdapter(int athletesCount, Context parent) {
-        countItems = athletesCount;
-
-        dbHelper = new DBHelper(parent);
-        db = dbHelper.getWritableDatabase();
-
-        c = db.query("athletesTable", null, null, null,
-                null, null, null);
-
-        c.moveToFirst();
-        this.parent = parent;
+    public AthleteAdapter(Context context, List<Athletes> athletesList,
+                          RecyclerView rvAthletes) {
+        this.context = context;
+        this.athletesList = athletesList;
+        this.rvAthletes = rvAthletes;
     }
 
     @NonNull
     @Override
-    public AthleteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        int layoutIdForListItem = R.layout.item_athlete;
-
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        View view = inflater.inflate(layoutIdForListItem, parent, false);
-
-        AthleteViewHolder viewHolder = new AthleteViewHolder(view);
-
-        if (moveToFirstCount == 0) {
-            dbHelper = new DBHelper(context);
-            db = dbHelper.getWritableDatabase();
-
-            c = db.query("athletesTable", null, null, null,
-                    null, null, null);
-
-            c.moveToFirst();
-        } else {
-            c.moveToNext();
-        }
-
-        name = c.getString(nameColIndex);
-        bday = c.getString(bdayColIndex);
-
-        moveToFirstCount++;
-
+        View view = inflater.inflate(R.layout.item_athlete, parent, false);
+        view.setOnClickListener(onClickListener);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AthleteViewHolder holder, int position) {
-        holder.bind();
+    public void onBindViewHolder(@NonNull AthleteAdapter.ViewHolder holder, int i) {
+        Athletes athletes = athletesList.get(i);
+        holder.tv_name.setText(athletes.getName());
+        holder.tv_bday.setText(athletes.getBday());
     }
+
 
     @Override
     public int getItemCount() {
-        return countItems;
+        return athletesList.size();
     }
 
-    class AthleteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView athleteNameView, athletebdayView;
 
-        public AthleteViewHolder(@NonNull View itemView) {
-            super(itemView);
-            athleteNameView = (TextView) itemView.findViewById(R.id.tv_athleteName);
-            athletebdayView = (TextView) itemView.findViewById(R.id.tv_athlete_bday);
+    private class myOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /* dbHelper = new DBHelper(parent);
-                    db = dbHelper.getWritableDatabase();
-
-                    Log.d(LOG_TAG, "delClick");
-                    String deleteName = athleteNameView.getText().toString();
-                    db.delete("athletesTable", "athlete_name = ?",
-                            new String[]{String.valueOf(deleteName)});
-
-                    db.close();
-                    dbHelper.close(); */
-                }
-            });
-        }
-
-        void bind() {
-            athleteNameView.setText(name);
-            athletebdayView.setText(bday);
-
-            db.close();
-            dbHelper.close();
         }
     }
 }

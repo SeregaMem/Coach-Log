@@ -15,16 +15,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sjproject.coach_log_new.DBHelper;
+import com.sjproject.coach_log_new.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthletesBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AthletesFragment extends Fragment {
 
     private FragmentAthletesBinding binding;
 
-    private static DBHelper dbHelper;
-    private SQLiteDatabase db;
+    DataBaseAdapter dataBaseAdapter;
 
-    private AthleteAdapter athleteAdapter;
+    AthleteAdapter athleteAdapter;
+    List<Athletes> athletesList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +61,8 @@ public class AthletesFragment extends Fragment {
     }
 
     private void takeDataBase () {
-        dbHelper = new DBHelper(getActivity());
-
-        db = dbHelper.getReadableDatabase();
+        dataBaseAdapter = new DataBaseAdapter(getActivity());
+        athletesList = dataBaseAdapter.getAllAthlete();
 
         RecyclerView rvAthletes = binding.rvAthletesList;
 
@@ -68,15 +71,8 @@ public class AthletesFragment extends Fragment {
 
         rvAthletes.setHasFixedSize(true);
 
-        athleteAdapter = new AthleteAdapter(getAthletesCount(), getActivity());
-
+        athleteAdapter = new AthleteAdapter(getActivity(), athletesList, rvAthletes);
         rvAthletes.setAdapter(athleteAdapter);
     }
 
-    public static int getAthletesCount () {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        int count = (int) DatabaseUtils.queryNumEntries(db, "athletesTable");
-        db.close();
-        return count;
-    }
 }
