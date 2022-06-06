@@ -1,8 +1,6 @@
 package com.sjproject.coach_log_new.ui.athletes;
 
 import android.content.Intent;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DBHelper;
 import com.sjproject.coach_log_new.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthletesBinding;
 
@@ -57,10 +54,10 @@ public class AthletesFragment extends Fragment {
 
     public void onStart () {
         super.onStart();
-        takeDataBase();
+        takeDataBaseInRecycleView();
     }
 
-    private void takeDataBase () {
+    private void takeDataBaseInRecycleView () {
         dataBaseAdapter = new DataBaseAdapter(getActivity());
         athletesList = dataBaseAdapter.getAllAthlete();
 
@@ -74,5 +71,4 @@ public class AthletesFragment extends Fragment {
         athleteAdapter = new AthleteAdapter(getActivity(), athletesList, rvAthletes);
         rvAthletes.setAdapter(athleteAdapter);
     }
-
 }

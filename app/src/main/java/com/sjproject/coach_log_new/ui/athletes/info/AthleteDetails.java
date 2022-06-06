@@ -1,6 +1,8 @@
 package com.sjproject.coach_log_new.ui.athletes.info;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +17,19 @@ public class AthleteDetails extends AppCompatActivity {
 
     String[] tabName = new String[] {"Инфо", "Тренировки", "Абонемент"};
 
+    public static String athleteID, athleteNAME, athletePHONE, athleteBDAY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_athlete_details);
+
+        savedInstanceState = getIntent().getExtras();
+
+        athleteID = savedInstanceState.get("athleteID").toString();
+        athleteNAME = savedInstanceState.get("athleteNAME").toString();
+        athletePHONE = savedInstanceState.get("athletePHONE").toString();
+        athleteBDAY = savedInstanceState.get("athleteBDAY").toString();
 
         ViewPager2 viewPager = (ViewPager2) findViewById(R.id.athleteDetails_viewPager);
         FragmentStateAdapter pageAdapter = new VPAdapter(this);
@@ -33,5 +44,6 @@ public class AthleteDetails extends AppCompatActivity {
                     }
                 });
         tabLayoutMediator.attach();
+
     }
 }

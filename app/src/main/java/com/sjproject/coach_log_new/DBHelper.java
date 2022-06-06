@@ -22,11 +22,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_PHONE = "phone";
     public static final String KEY_DATA = "bday";
     public static final String KEY_TRAINING_TABLE = "trainingTable";
+    public static final String KEY_DATE_TIMETABLE = "date";
+    public static final String KEY_TIME_TIMETABLE = "time";
+    public static final String KEY_ATHLETES_COUNT = "athletes_count";
 
     private static final String CREATE_TABLE_ATHLETES = "create table " + TABLE_NAME_ATHLETE +
             " (" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +
             KEY_PHONE + " text, " + KEY_DATA + " text, " + KEY_TRAINING_TABLE + " integer, " +
             " FOREIGN key (trainingTable) REFERENCES trainingTable(id));";
+
+    private static final String CREATE_TABLE_TIMETABLE = "create table " + TABLE_NAME_TIMETABLE +
+            " (" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +
+            KEY_DATE_TIMETABLE + " text, " + KEY_TIME_TIMETABLE + " text, " + KEY_ATHLETES_COUNT +
+            " integer);";
 
     private static final String DROP_TABLE = "drop table if exists ";
     private Context context;
@@ -39,8 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            db.execSQL("create table IF NOT EXISTS trainingTable ( id INTEGER primary key autoincrement, " +
-                    "training_name text, data text, time text, athletes_count integer);");
+            db.execSQL(CREATE_TABLE_TIMETABLE);
             db.execSQL(CREATE_TABLE_ATHLETES);
         } catch (SQLException e) {
             Toast.makeText(context, "" + e, Toast.LENGTH_LONG).show();

@@ -14,13 +14,16 @@
         android:theme="@style/Theme.Coach_log_new"
         tools:targetApi="31">
         <activity
+            android:name=".ui.athletes.AddSubActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.athletes.info.AthleteDetails"
             android:exported="false"
-            android:label="Информация о спортсмене"/>
+            android:label="Информация о спортсмене" />
         <activity
-            android:name=".ui.timetable.TrainingAdapterActivity"
+            android:name=".ui.timetable.CreateTrainingActivity"
             android:exported="false"
-            android:label="Редактирование тренировки"/>
+            android:label="Редактирование тренировки" />
         <activity
             android:name=".ui.athletes.AddAthletesActivity"
             android:exported="false"

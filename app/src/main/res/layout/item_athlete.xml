@@ -13,20 +13,8 @@
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_user_avatar" />
+        android:src="@drawable/ic_user_avatar" />
 
-    <ImageView
-        android:id="@+id/athlete_delete"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="12dp"
-        android:padding="6dp"
-        android:clickable="true"
-        android:onClick="delClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_athlete_delete"/>
 
     <TextView
         android:id="@+id/tv_athleteName"
@@ -38,7 +26,6 @@
         android:text="NO NAME"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/athlete_delete"
         app:layout_constraintStart_toEndOf="@id/athlete_avatar"
         app:layout_constraintTop_toTopOf="@id/athlete_avatar" />
 
@@ -51,7 +38,6 @@
         android:lines="1"
         android:text="NO BDAY"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@id/athlete_delete"
         app:layout_constraintStart_toStartOf="@id/tv_athleteName"
         app:layout_constraintTop_toBottomOf="@id/tv_athleteName" />
 

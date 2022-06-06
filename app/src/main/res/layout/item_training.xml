@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_training_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="NO NAME"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_training_Date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="NO Date"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_training_Name"
+        app:layout_constraintStart_toStartOf="@id/tv_training_Name"/>
+
+    <TextView
+        android:id="@+id/tv_training_AthletesCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="112dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="NO Count"
+        android:textSize="14sp"
+        android:textColor="@color/purple_200"
+        app:layout_constraintRight_toRightOf="@id/constraint"
+        app:layout_constraintTop_toBottomOf="@id/tv_training_Name" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_training_Date" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="6dp"
+        app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,7 @@
 package com.sjproject.coach_log_new.ui.athletes;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DBHelper;
 import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.ui.athletes.info.AthleteDetails;
 
 import java.util.List;
 
 
 public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.ViewHolder> {
 
-    String LOG_TAG = "myLog";
     Context context;
 
     List<Athletes> athletesList;
     RecyclerView rvAthletes;
+
     final View.OnClickListener onClickListener = new myOnClickListener();
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,7 +35,6 @@ public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.ViewHold
             tv_bday = (TextView) itemView.findViewById(R.id.tv_athlete_bday);
         }
     }
-
 
 
     public AthleteAdapter(Context context, List<Athletes> athletesList,
@@ -57,8 +55,8 @@ public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AthleteAdapter.ViewHolder holder, int i) {
-        Athletes athletes = athletesList.get(i);
+    public void onBindViewHolder(@NonNull AthleteAdapter.ViewHolder holder, int position) {
+        Athletes athletes = athletesList.get(position);
         holder.tv_name.setText(athletes.getName());
         holder.tv_bday.setText(athletes.getBday());
     }
@@ -70,11 +68,19 @@ public class AthleteAdapter extends RecyclerView.Adapter<AthleteAdapter.ViewHold
     }
 
 
-
     private class myOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            int itemPosition = rvAthletes.getChildLayoutPosition(v);
+            Athletes athlete = athletesList.get(itemPosition);
+            Intent intent = new Intent(context, AthleteDetails.class);
 
+            intent.putExtra("athleteID", athlete.getId());
+            intent.putExtra("athleteNAME", athlete.getName());
+            intent.putExtra("athletePHONE", athlete.getPhone());
+            intent.putExtra("athleteBDAY", athlete.getBday());
+
+            v.getContext().startActivity(intent);
         }
     }
 }
