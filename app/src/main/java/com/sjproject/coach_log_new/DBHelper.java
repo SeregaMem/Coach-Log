@@ -29,7 +29,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_ATHLETES = "create table " + TABLE_NAME_ATHLETE +
             " (" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +
             KEY_PHONE + " text, " + KEY_DATA + " text, " + KEY_TRAINING_TABLE + " integer, " +
-            " FOREIGN key (trainingTable) REFERENCES trainingTable(id));";
+            " FOREIGN key (" +KEY_ROWID+ ") REFERENCES " + TABLE_NAME_TIMETABLE + "(" +
+            KEY_ROWID + ") ON UPDATE CASCADE ON DELETE CASCADE);";
 
     private static final String CREATE_TABLE_TIMETABLE = "create table " + TABLE_NAME_TIMETABLE +
             " (" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +

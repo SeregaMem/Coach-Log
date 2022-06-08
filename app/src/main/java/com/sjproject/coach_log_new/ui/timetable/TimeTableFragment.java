@@ -45,17 +45,6 @@ public class TimeTableFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
-    public void onStart() {
-        super.onStart();
-        takeDataBaseInRecycleView();
-    }
-
     private void takeDataBaseInRecycleView() {
 
         CalendarView v = binding.calendarView;
@@ -78,7 +67,20 @@ public class TimeTableFragment extends Fragment {
                 trainingAdapter = new TrainingAdapter(getActivity(), trainingList, rvTimeTable, date);
 
                 rvTimeTable.setAdapter(trainingAdapter);
-            };
+            }
+
+            ;
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    public void onStart() {
+        super.onStart();
+        takeDataBaseInRecycleView();
     }
 }
