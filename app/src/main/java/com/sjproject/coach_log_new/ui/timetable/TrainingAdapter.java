@@ -1,6 +1,7 @@
 package com.sjproject.coach_log_new.ui.timetable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +21,14 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
     List<Training> trainingList;
     RecyclerView rvTraining;
-    String date;
 
     final View.OnClickListener onClickListener = new mOnClickListener();
 
 
-    public TrainingAdapter(Context context, List<Training> trainingList, RecyclerView rvTraining,
-                           String date) {
+    public TrainingAdapter(Context context, List<Training> trainingList, RecyclerView rvTraining) {
         this.context = context;
         this.trainingList = trainingList;
         this.rvTraining = rvTraining;
-        this.date = date;
     }
 
     @NonNull
@@ -39,18 +37,15 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_training, parent, false);
         view.setOnClickListener(onClickListener);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Training training = trainingList.get(position);
-        if (date.equals(training.getDate())) {
+            Training training = trainingList.get(position);
             holder.tvTrainingName.setText(training.getName());
             holder.tvTrainingDate.setText(training.getDate() + " " + training.getTime());
             holder.tvTrainingAthleteCount.setText("Спортсменов: " + training.getAthlete_count());
-        }
     }
 
     @Override
@@ -72,7 +67,18 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
     private class mOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            int itemPosition = rvTraining.getChildLayoutPosition(v);
+            Training training = trainingList.get(itemPosition);
+            Intent intent =  new Intent(context, CreateTrainingActivity.class);
 
+            intent.putExtra(Intent.EXTRA_COMPONENT_NAME, true);
+            intent.putExtra("trainingID", training.getId() + "");
+            intent.putExtra("trainingNAME", training.getName());
+            intent.putExtra("trainingDATE", training.getDate());
+            intent.putExtra("trainingTIME", training.getTime());
+            intent.putExtra("trainingCOUNT", training.getAthlete_count() + "");
+
+            v.getContext().startActivity(intent);
         }
     }
 }

@@ -29,8 +29,6 @@ public class TimeTableFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        TimeTableViewModel timeTableViewModel =
-                new ViewModelProvider(this).get(TimeTableViewModel.class);
 
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
 
@@ -60,11 +58,29 @@ public class TimeTableFragment extends Fragment {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 rvTimeTable.setLayoutManager(layoutManager);
 
-                rvTimeTable.setHasFixedSize(true);
-
                 String date = (month + 1) + "/" + dayOfMonth + "/" + year;
 
-                trainingAdapter = new TrainingAdapter(getActivity(), trainingList, rvTimeTable, date);
+                List<Training> sortedTrainingList= new ArrayList<>();
+
+                int i = 0;
+
+                while (trainingList.size() > i) {
+                    Training training = trainingList.get(i);
+                    if (date.equals(training.getDate())) {
+                        int id = training.getId();
+                        String name_training = training.getName();
+                        String date_training = training.getDate();
+                        String time_training = training.getTime();
+                        int count_training = training.getAthlete_count();
+                        Training new_training = new Training(id, name_training, date_training,
+                                time_training, count_training);
+                        sortedTrainingList.add(new_training);
+                    }
+                    i++;
+                }
+
+                trainingAdapter = new TrainingAdapter(getActivity(), sortedTrainingList,
+                        rvTimeTable);
 
                 rvTimeTable.setAdapter(trainingAdapter);
             }

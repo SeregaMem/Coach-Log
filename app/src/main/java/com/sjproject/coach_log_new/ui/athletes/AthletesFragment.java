@@ -29,8 +29,6 @@ public class AthletesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AthletesViewModel athletesViewModel =
-                new ViewModelProvider(this).get(AthletesViewModel.class);
 
         binding = FragmentAthletesBinding.inflate(inflater, container, false);
 
