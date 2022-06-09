@@ -18,14 +18,11 @@ public class StatisticFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        StatisticViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(StatisticViewModel.class);
+
 
         binding = FragmentStatisticBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
