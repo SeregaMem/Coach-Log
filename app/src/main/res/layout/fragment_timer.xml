@@ -7,20 +7,124 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/send_time"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content" />
-
     <TextView
-        android:id="@+id/tv_digital_clock"
+        android:id="@+id/tv_work_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="00:00"
+        android:text="Время работы: "
+        android:layout_marginStart="5dp"
         android:textColor="@color/black"
-        android:textSize="68sp"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/work_time"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="number"
+        android:text="20"
+        app:layout_constraintLeft_toRightOf="@id/tv_work_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="сек"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/work_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_chill_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:text="Время отдыха: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_work_time" />
+
+    <EditText
+        android:id="@+id/chill_time"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_marginStart="1dp"
+        android:text="10"
+        app:layout_constraintLeft_toRightOf="@id/tv_chill_time"
+        app:layout_constraintTop_toBottomOf="@id/work_time" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="сек"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/chill_time"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tv_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Раундов: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintRight_toLeftOf="@id/rounds"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/rounds"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:text="3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rounds_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="@+id/clock"
+        app:layout_constraintTop_toTopOf="@+id/clock" />
+
+    <TextView
+        android:id="@+id/timer_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clock" />
+
+    <Chronometer
+        android:id="@+id/chronometerCountDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="265dp"
+        android:countDown="true"
+        android:gravity="center_horizontal"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +132,7 @@
         android:id="@+id/clock"
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="144dp"
         android:src="@drawable/clock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,12 +143,12 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black"
         android:text="Старт"
         android:textColor="@color/white"
         android:textSize="26sp"
-        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,8 @@ public class TimeTableFragment extends Fragment {
     TrainingAdapter trainingAdapter;
     List<Training> trainingList = new ArrayList<>();
 
+    CalendarView calendarView;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -39,14 +41,14 @@ public class TimeTableFragment extends Fragment {
             }
         });
 
+        calendarView = binding.calendarView;
         View root = binding.getRoot();
+
         return root;
     }
 
     private void takeDataBaseInRecycleView() {
-
-        CalendarView v = binding.calendarView;
-        v.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year,
                                             int month, int dayOfMonth) {
@@ -60,7 +62,7 @@ public class TimeTableFragment extends Fragment {
 
                 String date = (month + 1) + "/" + dayOfMonth + "/" + year;
 
-                List<Training> sortedTrainingList= new ArrayList<>();
+                List<Training> sortedTrainingList = new ArrayList<>();
 
                 int i = 0;
 
@@ -84,9 +86,8 @@ public class TimeTableFragment extends Fragment {
 
                 rvTimeTable.setAdapter(trainingAdapter);
             }
-
-            ;
         });
+
     }
 
     @Override

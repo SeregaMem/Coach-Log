@@ -1,39 +1,32 @@
 package com.sjproject.coach_log_new.ui.sport_timer;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import com.sjproject.coach_log_new.R;
-import com.sjproject.coach_log_new.databinding.FragmentStatisticBinding;
 import com.sjproject.coach_log_new.databinding.FragmentTimerBinding;
 
-import org.w3c.dom.Text;
 
 public class TimerFragment extends Fragment {
 
     FragmentTimerBinding binding;
 
-    String LOG_TAG = "myLOg";
-
-    EditText getTimer;
-    TextView timer;
     Button btn_timer;
-    int time, INTERVAL = 1000;
-    CountDownTimer myTimer;
+
+    TextView tv_rounds, tv_timer_info;
+
+    EditText getWorkTime, getChillTime, getRounds;
+    long timeWork, timeChill, rounds;
+    private Chronometer chronometerCountDown;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -41,38 +34,36 @@ public class TimerFragment extends Fragment {
         binding = FragmentTimerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        getTimer = binding.sendTime;
-        timer = binding.tvDigitalClock;
+        getWorkTime = binding.workTime;
+        getChillTime = binding.chillTime;
+        getRounds = binding.rounds;
+
+        tv_rounds = binding.tvRoundsView;
+        tv_timer_info = binding.timerInfo;
+
+        chronometerCountDown = binding.chronometerCountDown;
+        chronometerCountDown.setFormat("%s");
+
         btn_timer = binding.btnTimer;
-
-        myTimer = new CountDownTimer(time, INTERVAL) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                Log.d(LOG_TAG,"ON TICK");
-                btn_timer.setText("Стоп");
-                long minutes = (millisUntilFinished / 1000) / 60;
-                long seconds = (millisUntilFinished / 1000) % 60;
-                String secondsFinal = "";
-                if (seconds <= 9)
-                    secondsFinal = "0" + seconds;
-                else secondsFinal = "" + seconds;
-                timer.setText(minutes + ":" + secondsFinal);
-            }
-
-            @Override
-            public void onFinish() {
-                btn_timer.setText("Старт");
-            }
-        };
 
         btn_timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(LOG_TAG, "onClick");
-                time = Integer.parseInt(getTimer.getText().toString());
-                time = time * 1000;
-                myTimer.start();
-                Log.d(LOG_TAG,"start TIMER");
+                start_btn();
+            }
+
+        });
+
+        chronometerCountDown.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                tv_rounds.setText(rounds + "");
+                if (timeWork > -1) {
+                    tv_timer_info.setText("Тренируемся!");
+                } else if (timeChill > -1) {
+                    tv_timer_info.setText("Отдыхаем!");
+                }
+                onChronometerTickHandler();
             }
         });
 
@@ -85,5 +76,53 @@ public class TimerFragment extends Fragment {
         binding = null;
     }
 
+    private void onChronometerTickHandler() {
+        if (rounds == 0) doStop();
+        else {
+            if (timeWork != -1) {
+                chronometerCountDown.setText(timeWork + "");
+                timeWork--;
+            } else if (timeChill != -1) {
+                chronometerCountDown.setText(timeChill + "");
+                timeChill--;
+            }
+            if ((timeWork == -1) && (timeChill == -1)) {
+                rounds = rounds - 1;
+                timeWork = Long.parseLong(getWorkTime.getText().toString());
+                timeChill = Long.parseLong(getChillTime.getText().toString());
+            }
+        }
+    }
 
+    private void doStart() {
+        chronometerCountDown.start();
+        btn_timer.setText("Стоп");
+        btn_timer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doStop();
+            }
+        });
+    }
+
+    private void doStop() {
+        chronometerCountDown.stop();
+        btn_timer.setText("Старт");
+        btn_timer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start_btn();
+            }
+        });
+        tv_timer_info.setText("");
+        tv_rounds.setText("");
+        chronometerCountDown.setText("0:00");
+    }
+
+    private void start_btn() {
+        rounds = Long.parseLong(getRounds.getText().toString());
+        timeWork = Long.parseLong(getWorkTime.getText().toString());
+        timeChill = Long.parseLong(getChillTime.getText().toString());
+        doStart();
+    }
 }
