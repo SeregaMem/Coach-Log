@@ -33,4 +33,13 @@
 
     <string name="menu_timer">Таймер</string>
     <string name="menu_statistic">Статистика</string>
+    <string name="tv_statistic_fast_find">Быстрый выбор периода:</string>
+    <string name="tv_statistic_period">Период:</string>
+    <string name="tv_statistic_training_count">Количество тренировок:</string>
+    <string name="tv_statistic_max_athletes_count">Макс. количество спортсменов:</string>
+    <string name="tv_statistic_sum">Общая сумма:</string>
+    <string name="tv_athleteINFO_sub_buydate">Дата приобретения:</string>
+    <string name="tv_athleteINFO_sub_training_payed">Оплачено тренировок:</string>
+    <string name="tv_athleteINFO_sub_price">Цена:</string>
+    <string name="btn_athleteINFO_sub_add_sub">Добавить абонемент</string>
 </resources>

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Coach_log_new"
         tools:targetApi="31">
         <activity
-            android:name=".ui.athletes.AddSubActivity"
+            android:name=".ui.athletes.info.AddSubActivity"
             android:exported="false" />
         <activity
             android:name=".ui.athletes.info.AthleteDetails"

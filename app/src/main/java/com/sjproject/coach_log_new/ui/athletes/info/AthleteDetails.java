@@ -17,7 +17,8 @@ public class AthleteDetails extends AppCompatActivity {
 
     String[] tabName = new String[] {"Инфо", "Тренировки", "Абонемент"};
 
-    public static String athleteID, athleteNAME, athletePHONE, athleteBDAY;
+    public static String athleteID_string, athleteNAME, athletePHONE, athleteBDAY;
+    public static int athleteID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public class AthleteDetails extends AppCompatActivity {
 
         savedInstanceState = getIntent().getExtras();
 
-        athleteID = savedInstanceState.get("athleteID").toString();
+        athleteID_string = savedInstanceState.get("athleteID").toString();
+        athleteID = Integer.parseInt(athleteID_string);
         athleteNAME = savedInstanceState.get("athleteNAME").toString();
         athletePHONE = savedInstanceState.get("athletePHONE").toString();
         athleteBDAY = savedInstanceState.get("athleteBDAY").toString();

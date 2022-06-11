@@ -30,7 +30,6 @@ public class VPAdapter extends FragmentStateAdapter {
             default:
                 return null;
         }
-        //return (AthleteINFOFragment.getInstance(position));
     }
 
     @Override

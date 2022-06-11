@@ -62,6 +62,9 @@ public class CreateTrainingActivity extends AppCompatActivity {
         binding = ActivityCreateTrainingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        dbHelper = new DBHelper(this);
+
         btnAddTimeTable = binding.btnAddTimeTable;
         btnAddTimeTable.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +183,7 @@ public class CreateTrainingActivity extends AppCompatActivity {
 
         db.insert(DBHelper.TABLE_NAME_TIMETABLE,
                 null, cv);
+
 
         dbHelper.close();
     }

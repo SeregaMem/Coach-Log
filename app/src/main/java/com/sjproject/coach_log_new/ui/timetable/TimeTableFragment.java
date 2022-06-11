@@ -60,7 +60,11 @@ public class TimeTableFragment extends Fragment {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 rvTimeTable.setLayoutManager(layoutManager);
 
-                String date = (month + 1) + "/" + dayOfMonth + "/" + year;
+                String date;
+
+                if (((month + 1) / 10) == 1)
+                    date = dayOfMonth + "." + (month + 1) + "." + year;
+                else date = dayOfMonth + ".0" + (month + 1) + "." + year;;
 
                 List<Training> sortedTrainingList = new ArrayList<>();
 
@@ -73,14 +77,13 @@ public class TimeTableFragment extends Fragment {
                         String name_training = training.getName();
                         String date_training = training.getDate();
                         String time_training = training.getTime();
-                        int count_training = training.getAthlete_count();
+                        int athleteCount = training.getAthlete_count();
                         Training new_training = new Training(id, name_training, date_training,
-                                time_training, count_training);
+                                time_training, athleteCount);
                         sortedTrainingList.add(new_training);
                     }
                     i++;
                 }
-
                 trainingAdapter = new TrainingAdapter(getActivity(), sortedTrainingList,
                         rvTimeTable);
 
