@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.timetable.CreateTrainingActivity">
+    tools:context=".ui.timetable.timetable_create_training.CreateTrainingActivity">
 
     <LinearLayout
         android:id="@+id/ll_checkbox"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -21,15 +23,17 @@
                 android:id="@+id/btnDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btnTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp" />
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <TextView
@@ -65,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="0"/>
+                android:text="0" />
 
         </LinearLayout>
 
@@ -75,9 +79,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="@string/btn_add_time_table" />
+            android:text="@string/btn_add_time_table"
+            android:textColor="@color/white" />
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_create_training"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_checkbox" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

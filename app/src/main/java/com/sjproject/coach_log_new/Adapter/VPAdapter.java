@@ -1,13 +1,13 @@
-package com.sjproject.coach_log_new.ui.athletes.info;
+package com.sjproject.coach_log_new.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.sjproject.coach_log_new.ui.athletes.info.AthleteINFOFragment;
-import com.sjproject.coach_log_new.ui.athletes.info.AthleteSubscriptionINFO;
-import com.sjproject.coach_log_new.ui.athletes.info.AthleteTrainingINFOFragment;
+import com.sjproject.coach_log_new.ui.athletes.athlete_info.AthleteINFOFragment;
+import com.sjproject.coach_log_new.ui.athletes.athlete_info.AthleteSubscriptionINFO;
+import com.sjproject.coach_log_new.ui.athletes.athlete_info.AthleteTrainingINFOFragment;
 
 public class VPAdapter extends FragmentStateAdapter {
 

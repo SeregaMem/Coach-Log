@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes;
+package com.sjproject.coach_log_new.ui.athletes.athlete_main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DataBaseAdapter;
+import com.sjproject.coach_log_new.Adapter.AthleteAdapter;
+import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthletesBinding;
+import com.sjproject.coach_log_new.object.Athletes;
+import com.sjproject.coach_log_new.ui.athletes.athlete_create_athlete.AddAthletesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +24,18 @@ public class AthletesFragment extends Fragment {
 
     private FragmentAthletesBinding binding;
 
-    DataBaseAdapter dataBaseAdapter;
+    private DataBaseAdapter dataBaseAdapter;
 
-    AthleteAdapter athleteAdapter;
-    List<Athletes> athletesList = new ArrayList<>();
+    private RecyclerView rvAthletes;
+    private AthleteAdapter athleteAdapter;
+    private List<Athletes> athletesList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentAthletesBinding.inflate(inflater, container, false);
 
+        rvAthletes = binding.rvAthletesList;
 
         binding.btnAddAthletes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,22 +48,15 @@ public class AthletesFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
     public void onStart () {
         super.onStart();
         takeDataBaseInRecycleView();
     }
 
+
     private void takeDataBaseInRecycleView () {
         dataBaseAdapter = new DataBaseAdapter(getActivity());
         athletesList = dataBaseAdapter.getAllAthlete();
-
-        RecyclerView rvAthletes = binding.rvAthletesList;
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvAthletes.setLayoutManager(layoutManager);
@@ -68,5 +65,13 @@ public class AthletesFragment extends Fragment {
 
         athleteAdapter = new AthleteAdapter(getActivity(), athletesList, rvAthletes);
         rvAthletes.setAdapter(athleteAdapter);
+        dataBaseAdapter.close();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        athletesList = null;
     }
 }

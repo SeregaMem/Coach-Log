@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
 
     <ImageView
         android:id="@+id/athlete_avatar"
@@ -40,6 +41,19 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tv_athleteName"
         app:layout_constraintTop_toBottomOf="@id/tv_athleteName" />
+
+    <TextView
+        android:id="@+id/tv_sub_training_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/green"
+        android:textSize="18sp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="match_parent"

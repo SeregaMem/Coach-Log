@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_time_table"
-        android:name="com.sjproject.coach_log_new.ui.timetable.TimeTableFragment"
+        android:name="com.sjproject.coach_log_new.ui.timetable.timetable_main.TimeTableFragment"
         android:label="@string/menu_time_table"
         tools:layout="@layout/fragment_time_table" />
 
     <fragment
         android:id="@+id/nav_athletes"
-        android:name="com.sjproject.coach_log_new.ui.athletes.AthletesFragment"
+        android:name="com.sjproject.coach_log_new.ui.athletes.athlete_main.AthletesFragment"
         android:label="@string/menu_athletes"
         tools:layout="@layout/fragment_athletes" />
 

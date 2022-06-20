@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.timetable;
+package com.sjproject.coach_log_new.object;
 
 public class Training {
     private int id;

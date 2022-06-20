@@ -1,8 +1,7 @@
-package com.sjproject.coach_log_new.ui.timetable;
+package com.sjproject.coach_log_new.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.ui.timetable.timetable_create_training.CreateTrainingActivity;
+import com.sjproject.coach_log_new.object.Training;
 
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
     private class mOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            int itemPosition = rvTraining.getChildLayoutPosition(v);
+            /*int itemPosition = rvTraining.getChildLayoutPosition(v);
             Training training = trainingList.get(itemPosition);
             Intent intent =  new Intent(context, CreateTrainingActivity.class);
 
@@ -78,7 +79,7 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
             intent.putExtra("trainingTIME", training.getTime());
             intent.putExtra("trainingCOUNT", training.getAthlete_count() + "");
 
-            v.getContext().startActivity(intent);
+            v.getContext().startActivity(intent);*/
         }
     }
 }

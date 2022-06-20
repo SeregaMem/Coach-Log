@@ -1,15 +1,10 @@
-package com.sjproject.coach_log_new;
+package com.sjproject.coach_log_new.DataBase;
 
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
-
-import com.sjproject.coach_log_new.ui.athletes.Athletes;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -22,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_NAME = "name";
     public static final String KEY_PHONE = "phone";
     public static final String KEY_DATA = "bday";
-    public static final String KEY_TRAINING_TABLE = "trainingTable";
+    public static final String KEY_ATHLETE_TRAINING_COUNT = "athlete_training_count";
     public static final String KEY_DATE_TIMETABLE = "date";
     public static final String KEY_TIME_TIMETABLE = "time";
     public static final String KEY_ATHLETES_COUNT = "athletes_count";
@@ -38,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_ATHLETES = "create table " + TABLE_NAME_ATHLETE +
             "(" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +
-            KEY_PHONE + " text, " + KEY_DATA + " text, " + KEY_TRAINING_TABLE + " integer);";
+            KEY_PHONE + " text, " + KEY_DATA + " text, " + KEY_ATHLETE_TRAINING_COUNT + " integer);";
 
     private static final String CREATE_TABLE_TIMETABLE = "create table " + TABLE_NAME_TIMETABLE +
             " (" + KEY_ROWID + " integer primary key autoincrement, " + KEY_NAME + " text, " +
@@ -46,8 +41,8 @@ public class DBHelper extends SQLiteOpenHelper {
             KEY_ATHLETES_COUNT + " integer);";
 
     private static final String CREATE_TABLE_TRAINING_ATHLETES = "create table " +
-            TABLE_NAME_TRAINING_ATHLETES + "(" + KEY_ID_ATHLETE + " number, " +
-            KEY_ID_TRAINING + " number);";
+            TABLE_NAME_TRAINING_ATHLETES + "(" + KEY_ID_ATHLETE + " integer, " +
+            KEY_ID_TRAINING + " integer);";
 
     private static final String CREATE_TABLE_SUBSCRIPTION = "create table " + TABLE_NAME_SUBSCRIPTION +
             "(" + KEY_ROWID + " integer, " + KEY_BUY_DATE + " text, " +

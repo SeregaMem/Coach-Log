@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes;
+package com.sjproject.coach_log_new.object;
 
 public class Athletes {
 
@@ -6,12 +6,14 @@ public class Athletes {
     private String name;
     private String phone;
     private String bday;
+    private int training_count;
 
-    public Athletes(int id, String name, String phone, String bday) {
+    public Athletes(int id, String name, String phone, String bday, int training_count) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.bday = bday;
+        this.training_count = training_count;
     }
 
     public int getId() {
@@ -28,5 +30,9 @@ public class Athletes {
 
     public String getBday() {
         return bday;
+    }
+
+    public int getTraining_count() {
+        return training_count;
     }
 }

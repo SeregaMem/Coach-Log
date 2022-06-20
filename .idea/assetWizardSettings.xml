@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$ANDROID_SDK_ROOT$/icons/material/materialicons/perm_identity/baseline_perm_identity_24.xml" />
+                                      <entry key="url" value="file:/$ANDROID_SDK_ROOT$/icons/material/materialicons/delete_forever/baseline_delete_forever_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="3d3d3d" />
-                            <entry key="outputName" value="ic_launcher_person" />
+                            <entry key="outputName" value="ic_delete_athlete" />
                             <entry key="sourceFile" value="E:\AndroidPJ\Coach_log_new" />
                           </map>
                         </option>

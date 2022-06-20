@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes;
+package com.sjproject.coach_log_new.object;
 
 public class Subscription {
     int id;

@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes.info;
+package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,32 +9,32 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DataBaseAdapter;
-import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthleteTrainingInfoBinding;
-import com.sjproject.coach_log_new.ui.athletes.Subscription;
-import com.sjproject.coach_log_new.ui.timetable.Training;
-import com.sjproject.coach_log_new.ui.timetable.TrainingAdapter;
-import com.sjproject.coach_log_new.ui.timetable.Training_athlete;
+import com.sjproject.coach_log_new.object.Training;
+import com.sjproject.coach_log_new.Adapter.TrainingAdapter;
+import com.sjproject.coach_log_new.object.Training_athlete;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteTrainingINFOFragment extends Fragment {
 
-    FragmentAthleteTrainingInfoBinding binding;
-    RecyclerView rv_training_athlete;
+    private FragmentAthleteTrainingInfoBinding binding;
+    private RecyclerView rv_training_athlete;
 
-    DataBaseAdapter dataBaseAdapter;
-    List<Training_athlete> training_athleteList = new ArrayList<>();
+    private DataBaseAdapter dataBaseAdapter;
+    private List<Training_athlete> training_athleteList = new ArrayList<>();
 
-    TrainingAdapter trainingAdapter;
+    private TrainingAdapter trainingAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentAthleteTrainingInfoBinding.inflate(inflater, container, false);
+
+        dataBaseAdapter = new DataBaseAdapter(getActivity());
 
         rv_training_athlete = binding.rvTrainingAthlete;
 
@@ -49,7 +49,6 @@ public class AthleteTrainingINFOFragment extends Fragment {
     }
 
     private void takeDataBaseRV() {
-        dataBaseAdapter = new DataBaseAdapter(getActivity());
         training_athleteList = dataBaseAdapter.getAllTrainingAthlete();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -89,5 +88,13 @@ public class AthleteTrainingINFOFragment extends Fragment {
         trainingAdapter = new TrainingAdapter(getActivity(), sortedTrainingList, rv_training_athlete);
 
         rv_training_athlete.setAdapter(trainingAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        training_athleteList = null;
+        dataBaseAdapter.close();
     }
 }

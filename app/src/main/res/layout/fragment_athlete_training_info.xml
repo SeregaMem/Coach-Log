@@ -10,7 +10,7 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.athletes.info.AthleteTrainingINFOFragment">
+        tools:context=".ui.athletes.athlete_info.AthleteTrainingINFOFragment">
     </ScrollView>
 
     <androidx.recyclerview.widget.RecyclerView

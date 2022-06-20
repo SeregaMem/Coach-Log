@@ -1,8 +1,6 @@
-package com.sjproject.coach_log_new.ui.athletes.info;
+package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +9,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.sjproject.coach_log_new.Adapter.VPAdapter;
 import com.sjproject.coach_log_new.R;
 
 public class AthleteDetails extends AppCompatActivity {
 
-    String[] tabName = new String[] {"Инфо", "Тренировки", "Абонемент"};
+    private String[] tabName = new String[] {"Инфо", "Тренировки", "Абонемент"};
 
     public static String athleteID_string, athleteNAME, athletePHONE, athleteBDAY;
     public static int athleteID;
@@ -46,6 +45,5 @@ public class AthleteDetails extends AppCompatActivity {
                     }
                 });
         tabLayoutMediator.attach();
-
     }
 }

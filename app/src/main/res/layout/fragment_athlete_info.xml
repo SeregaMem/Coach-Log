@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.athletes.info.AthleteINFOFragment">
+    tools:context=".ui.athletes.athlete_info.AthleteINFOFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,5 +59,14 @@
         android:text="NO B-DAY"
         android:textColor="@color/cardview_dark_background"
         android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_delete_athlete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/btn_delete_athlete"
+        android:textColor="@color/white" />
 
 </LinearLayout>

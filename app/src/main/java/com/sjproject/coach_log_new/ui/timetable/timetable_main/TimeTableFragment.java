@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.timetable;
+package com.sjproject.coach_log_new.ui.timetable.timetable_main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +9,14 @@ import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DataBaseAdapter;
+import com.sjproject.coach_log_new.Adapter.TrainingAdapter;
+import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentTimeTableBinding;
+import com.sjproject.coach_log_new.ui.timetable.timetable_create_training.CreateTrainingActivity;
+import com.sjproject.coach_log_new.object.Training;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,9 @@ public class TimeTableFragment extends Fragment {
 
     private FragmentTimeTableBinding binding;
 
-    DataBaseAdapter dataBaseAdapter;
-    TrainingAdapter trainingAdapter;
-    List<Training> trainingList = new ArrayList<>();
+    private DataBaseAdapter dataBaseAdapter;
+    private TrainingAdapter trainingAdapter;
+    private List<Training> trainingList = new ArrayList<>();
 
     CalendarView calendarView;
 
@@ -34,20 +36,24 @@ public class TimeTableFragment extends Fragment {
 
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
 
-        binding.btnCreateTimeTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CreateTrainingActivity.class));
-            }
-        });
+
+        binding.btnCreateTimeTable.setOnClickListener(view -> startActivity(new Intent(getActivity(),
+                CreateTrainingActivity.class)));
 
         calendarView = binding.calendarView;
+
+
+        takeDataBaseInRecycleView();
+
+        calendarView.setDate(System.currentTimeMillis(),false,true);
+
         View root = binding.getRoot();
 
         return root;
     }
 
     private void takeDataBaseInRecycleView() {
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year,
@@ -64,7 +70,8 @@ public class TimeTableFragment extends Fragment {
 
                 if (((month + 1) / 10) == 1)
                     date = dayOfMonth + "." + (month + 1) + "." + year;
-                else date = dayOfMonth + ".0" + (month + 1) + "." + year;;
+                else date = dayOfMonth + ".0" + (month + 1) + "." + year;
+                ;
 
                 List<Training> sortedTrainingList = new ArrayList<>();
 
@@ -90,13 +97,14 @@ public class TimeTableFragment extends Fragment {
                 rvTimeTable.setAdapter(trainingAdapter);
             }
         });
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        trainingList = null;
+        dataBaseAdapter.close();
     }
 
     public void onStart() {

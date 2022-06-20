@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes.info;
+package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,37 +11,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sjproject.coach_log_new.DataBaseAdapter;
-import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthleteSubscriptionInfoBinding;
-import com.sjproject.coach_log_new.ui.athletes.Subscription;
-import com.sjproject.coach_log_new.ui.athletes.SubscriptionAdapter;
-import com.sjproject.coach_log_new.ui.timetable.CreateTrainingActivity;
-import com.sjproject.coach_log_new.ui.timetable.Training;
-import com.sjproject.coach_log_new.ui.timetable.TrainingAdapter;
+import com.sjproject.coach_log_new.object.Subscription;
+import com.sjproject.coach_log_new.Adapter.SubscriptionAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteSubscriptionINFO extends Fragment {
 
-    FragmentAthleteSubscriptionInfoBinding binding;
-    Button btn_add_sub_activity;
+    private FragmentAthleteSubscriptionInfoBinding binding;
+    private Button btn_add_sub_fragment;
 
-    RecyclerView rv_sub;
+    private RecyclerView rv_sub;
 
-    DataBaseAdapter dataBaseAdapter;
-    SubscriptionAdapter subscriptionAdapter;
-    List<Subscription> subscriptionList = new ArrayList<>();
+    private DataBaseAdapter dataBaseAdapter;
+    private SubscriptionAdapter subscriptionAdapter;
+    private List<Subscription> subscriptionList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAthleteSubscriptionInfoBinding.inflate(inflater, container,
                 false);
-        //ЭТО НЕ АКТИВИТИ ЭТО ФРАГМЕНТ
-        btn_add_sub_activity = binding.btnAddSub;
-        btn_add_sub_activity.setOnClickListener(new View.OnClickListener() {
+        dataBaseAdapter = new DataBaseAdapter(getActivity());
+        btn_add_sub_fragment = binding.btnAddSub;
+        btn_add_sub_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), AddSubActivity.class));
@@ -61,6 +57,7 @@ public class AthleteSubscriptionINFO extends Fragment {
 
     private void takeDataBaseRV(){
         dataBaseAdapter = new DataBaseAdapter(getActivity());
+
         subscriptionList = dataBaseAdapter.getAllSubscription();
 
         rv_sub = binding.rvSub;
@@ -92,5 +89,13 @@ public class AthleteSubscriptionINFO extends Fragment {
                 rv_sub);
 
         rv_sub.setAdapter(subscriptionAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        subscriptionList = null;
+        dataBaseAdapter.close();
     }
 }

@@ -18,14 +18,14 @@ import com.sjproject.coach_log_new.databinding.FragmentTimerBinding;
 
 public class TimerFragment extends Fragment {
 
-    FragmentTimerBinding binding;
+    private FragmentTimerBinding binding;
 
-    Button btn_timer;
+    private Button btn_timer;
 
-    TextView tv_rounds, tv_timer_info;
+    private TextView tv_rounds, tv_timer_info;
 
-    EditText getWorkTime, getChillTime, getRounds;
-    long timeWork, timeChill, rounds;
+    private EditText getWorkTime, getChillTime, getRounds;
+    private long timeWork, timeChill, rounds;
     private Chronometer chronometerCountDown;
 
     @Override
@@ -68,12 +68,6 @@ public class TimerFragment extends Fragment {
         });
 
         return root;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
     }
 
     private void onChronometerTickHandler() {
@@ -124,5 +118,11 @@ public class TimerFragment extends Fragment {
         timeWork = Long.parseLong(getWorkTime.getText().toString());
         timeChill = Long.parseLong(getChillTime.getText().toString());
         doStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

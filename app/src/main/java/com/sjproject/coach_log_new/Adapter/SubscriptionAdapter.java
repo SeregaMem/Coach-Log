@@ -1,4 +1,4 @@
-package com.sjproject.coach_log_new.ui.athletes;
+package com.sjproject.coach_log_new.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.object.Subscription;
 
 import java.util.List;
 

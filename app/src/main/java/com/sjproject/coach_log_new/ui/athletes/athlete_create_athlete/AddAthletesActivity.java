@@ -1,8 +1,6 @@
-package com.sjproject.coach_log_new.ui.athletes;
+package com.sjproject.coach_log_new.ui.athletes.athlete_create_athlete;
 
 import android.app.DatePickerDialog;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -12,34 +10,39 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sjproject.coach_log_new.DBHelper;
+import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.R;
+import com.sjproject.coach_log_new.databinding.ActivityAddAthletesBinding;
 
 import java.util.Calendar;
 
 public class AddAthletesActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private ActivityAddAthletesBinding binding;
+
     private Calendar calendar = Calendar.getInstance();
     private EditText etName, etPhoneNumber, etBDate;
     private Button btnCreateNewAthlete;
 
-    DBHelper dbHelper;
+    private DataBaseAdapter dataBaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_athletes);
 
-        etName = (EditText) findViewById(R.id.etName);
-        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
+        binding = ActivityAddAthletesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        etBDate = (EditText) findViewById(R.id.etBDate);
+        etName = binding.etName;
+        etPhoneNumber = binding.etPhoneNumber;
+
+        etBDate = binding.etBDate;
         etBDate.setOnClickListener(this);
 
-        btnCreateNewAthlete = (Button) findViewById(R.id.btnCreateNewAthlete);
+        btnCreateNewAthlete = binding.btnCreateNewAthlete;
         btnCreateNewAthlete.setOnClickListener(this);
 
-        dbHelper = new DBHelper(this);
+        dataBaseAdapter = new DataBaseAdapter(this);
     }
 
     public void setDate(View v) {
@@ -67,33 +70,25 @@ public class AddAthletesActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.etBDate:
+            case (R.id.etBDate):
                 setInitialDate();
                 setDate(v);
                 break;
-            case R.id.btnCreateNewAthlete:
-                addAthletesInBase();
+            case (R.id.btnCreateNewAthlete):
+                String name = etName.getText().toString();
+                String phone = etPhoneNumber.getText().toString();
+                String bday = etBDate.getText().toString();
+
+                dataBaseAdapter.addAthlete(name, phone, bday);
+
                 finish();
-                break;
         }
     }
 
-    private void addAthletesInBase() {
-        ContentValues cv = new ContentValues();
-
-        String name = etName.getText().toString();
-        String phone_number = etPhoneNumber.getText().toString();
-        String bday = etBDate.getText().toString();
-
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        cv.put(DBHelper.KEY_NAME, name);
-        cv.put(DBHelper.KEY_PHONE, phone_number);
-        cv.put(DBHelper.KEY_DATA, bday);
-
-        db.insert(DBHelper.TABLE_NAME_ATHLETE, null, cv);
-
-        dbHelper.close();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dataBaseAdapter.close();
+        binding = null;
     }
 }

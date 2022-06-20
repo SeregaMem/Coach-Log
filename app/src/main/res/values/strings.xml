@@ -42,4 +42,5 @@
     <string name="tv_athleteINFO_sub_training_payed">Оплачено тренировок:</string>
     <string name="tv_athleteINFO_sub_price">Цена:</string>
     <string name="btn_athleteINFO_sub_add_sub">Добавить абонемент</string>
+    <string name="btn_delete_athlete">Удалить</string>
 </resources>

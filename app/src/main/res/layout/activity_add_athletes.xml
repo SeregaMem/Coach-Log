@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.athletes.AddAthletesActivity"
+    tools:context=".ui.athletes.athlete_create_athlete.AddAthletesActivity"
     android:orientation="vertical">
 
     <TextView
@@ -64,8 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
+        android:textColor="@color/white"
         android:text="@string/btn_create_new_athlete"
-        android:textSize="15dp"/>
+        android:textSize="15sp"/>
 
 
 </LinearLayout>
