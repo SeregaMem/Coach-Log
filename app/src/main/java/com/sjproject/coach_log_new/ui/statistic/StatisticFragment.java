@@ -173,7 +173,7 @@ public class StatisticFragment extends Fragment implements View.OnClickListener 
 
         i = 0;
         int training_count = 0;
-        while (trainingList.size() >= i) {
+        while (trainingList.size() > i) {
             Training training = trainingList.get(i);
             String training_date = training.getDate();
 

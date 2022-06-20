@@ -1,5 +1,6 @@
 package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import com.sjproject.coach_log_new.Adapter.VPAdapter;
 import com.sjproject.coach_log_new.R;
 
 public class AthleteDetails extends AppCompatActivity {
+
+    public Context contextDetails = this;
 
     private String[] tabName = new String[] {"Инфо", "Тренировки", "Абонемент"};
 
@@ -45,5 +48,9 @@ public class AthleteDetails extends AppCompatActivity {
                     }
                 });
         tabLayoutMediator.attach();
+    }
+
+    public void closeActivity() {
+        finish();
     }
 }

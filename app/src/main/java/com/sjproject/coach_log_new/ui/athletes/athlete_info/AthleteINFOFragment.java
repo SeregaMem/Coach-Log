@@ -2,6 +2,8 @@ package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
 import static com.sjproject.coach_log_new.ui.athletes.athlete_info.AthleteDetails.athleteID;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
 import com.sjproject.coach_log_new.databinding.FragmentAthleteInfoBinding;
+
+import java.util.zip.Deflater;
 
 
 public class AthleteINFOFragment extends Fragment {
@@ -46,7 +50,6 @@ public class AthleteINFOFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dataBaseAdapter.deleteAthlete(athleteID);
-                onDestroy();
             }
         });
 

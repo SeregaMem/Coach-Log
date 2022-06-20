@@ -69,8 +69,8 @@ public class TimeTableFragment extends Fragment {
                 String date;
 
                 if (((month + 1) / 10) == 1)
-                    date = dayOfMonth + "." + (month + 1) + "." + year;
-                else date = dayOfMonth + ".0" + (month + 1) + "." + year;
+                    date = dayOfMonth + "/" + (month + 1) + "/" + year;
+                else date = dayOfMonth + "/0" + (month + 1) + "/" + year;
                 ;
 
                 List<Training> sortedTrainingList = new ArrayList<>();
@@ -95,6 +95,7 @@ public class TimeTableFragment extends Fragment {
                         rvTimeTable);
 
                 rvTimeTable.setAdapter(trainingAdapter);
+                dataBaseAdapter.close();
             }
         });
     }
@@ -104,7 +105,6 @@ public class TimeTableFragment extends Fragment {
         super.onDestroyView();
         binding = null;
         trainingList = null;
-        dataBaseAdapter.close();
     }
 
     public void onStart() {

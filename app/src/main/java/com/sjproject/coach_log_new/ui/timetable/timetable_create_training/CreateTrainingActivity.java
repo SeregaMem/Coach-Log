@@ -83,8 +83,14 @@ public class CreateTrainingActivity extends AppCompatActivity {
         btnDate = binding.btnDate;
         btnTime = binding.btnTime;
 
-        setInitialDate();
-        setInitialTime();
+        btnDate.setText(DateUtils.formatDateTime(this,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_DATE |
+                        DateUtils.FORMAT_SHOW_YEAR));
+
+        btnTime.setText(DateUtils.formatDateTime(this,
+                dateAndTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
+
 
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,19 +121,6 @@ public class CreateTrainingActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void setInitialDate() {
-
-        btnDate.setText(DateUtils.formatDateTime(this,
-                dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_DATE |
-                        DateUtils.FORMAT_SHOW_YEAR));
-    }
-
-    private void setInitialTime() {
-        btnTime.setText(DateUtils.formatDateTime(this,
-                dateAndTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME));
-    }
-
     public void setTime(View v) {
         new TimePickerDialog(CreateTrainingActivity.this, t,
                 dateAndTime.get(Calendar.HOUR_OF_DAY),
@@ -139,7 +132,16 @@ public class CreateTrainingActivity extends AppCompatActivity {
             dateAndTime.set(Calendar.YEAR, year);
             dateAndTime.set(Calendar.MONTH, monthOfYear);
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            setInitialDate();
+
+            String day = "" + dayOfMonth;
+            String month = "" + (monthOfYear + 1);
+
+            if (monthOfYear < 10) month = "0" + (monthOfYear + 1);
+            if (dayOfMonth < 10) day = "0" + dayOfMonth;
+
+            String date = day + "/" + month + "/" + year;
+
+            btnDate.setText(date);
         }
     };
 
@@ -147,7 +149,14 @@ public class CreateTrainingActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             dateAndTime.set(Calendar.MINUTE, minute);
-            setInitialTime();
+
+            String hour = hourOfDay + "";
+            String min = minute + "";
+
+            if (hourOfDay < 10)  hour = "0" + hourOfDay;
+            if (minute < 10) min = "0" + minute;
+
+            btnTime.setText(hour + ":" + min);
         }
     };
 
