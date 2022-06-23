@@ -43,4 +43,6 @@
     <string name="tv_athleteINFO_sub_price">Цена:</string>
     <string name="btn_athleteINFO_sub_add_sub">Добавить абонемент</string>
     <string name="btn_delete_athlete">Удалить</string>
+    <string name="btn_update_time_table">Изменить</string>
+    <string name="btn_delete_timetable">Удалить</string>
 </resources>

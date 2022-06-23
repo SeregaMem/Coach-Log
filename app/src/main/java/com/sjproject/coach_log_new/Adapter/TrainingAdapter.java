@@ -18,10 +18,10 @@ import java.util.List;
 
 public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHolder> {
 
-    Context context;
+    private Context context;
 
-    List<Training> trainingList;
-    RecyclerView rvTraining;
+    private List<Training> trainingList;
+    private RecyclerView rvTraining;
 
     final View.OnClickListener onClickListener = new mOnClickListener();
 

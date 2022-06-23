@@ -12,12 +12,11 @@
         app:layout_constraintTop_toTopOf="parent"
         android:alpha="0" />
 
-
-    <CheckBox
+    <RadioButton
         android:id="@+id/athlete_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +24,6 @@
         android:id="@+id/tv_athleteName_cb"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:lines="1"

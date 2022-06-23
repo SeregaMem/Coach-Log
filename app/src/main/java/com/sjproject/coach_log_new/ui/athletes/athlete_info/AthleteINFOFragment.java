@@ -2,7 +2,9 @@ package com.sjproject.coach_log_new.ui.athletes.athlete_info;
 
 import static com.sjproject.coach_log_new.ui.athletes.athlete_info.AthleteDetails.athleteID;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +16,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.sjproject.coach_log_new.DataBase.DataBaseAdapter;
+import com.sjproject.coach_log_new.MainActivity;
 import com.sjproject.coach_log_new.databinding.FragmentAthleteInfoBinding;
-
-import java.util.zip.Deflater;
 
 
 public class AthleteINFOFragment extends Fragment {
@@ -27,6 +28,9 @@ public class AthleteINFOFragment extends Fragment {
     private Button btnDeleteAthlete;
 
     private DataBaseAdapter dataBaseAdapter;
+
+    final int DIALOG_EXIT = 1;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,13 +53,34 @@ public class AthleteINFOFragment extends Fragment {
         btnDeleteAthlete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataBaseAdapter.deleteAthlete(athleteID);
+                onCreateDialog();
             }
         });
 
         View root = binding.getRoot();
 
         return root;
+    }
+
+    protected void onCreateDialog() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+        adb.setTitle("Внимание!");
+        adb.setMessage("Вы уверены, что хотите удалить запись о спортсмене?");
+        adb.setNegativeButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dataBaseAdapter.deleteAthlete(athleteID);
+                Intent intent = new Intent(getActivity(), AthleteDetails.class);
+                startActivity(intent);
+            }
+        });
+        adb.setPositiveButton("Отмена", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog dialog = adb.create();
+        dialog.show();
     }
 
     @Override

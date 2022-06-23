@@ -218,6 +218,21 @@ public class DataBaseAdapter {
                 KEY_ROWID + "=" + id, null);
     }
 
+    public void updateTrainingAthlete(int trainingID, List<Training_athlete> training_athleteList) {
+        db.delete(DBHelper.TABLE_NAME_TRAINING_ATHLETES,
+                DBHelper.KEY_ID_TRAINING + " = " + trainingID, null);
+
+        ContentValues cv = new ContentValues();
+
+        int i = 0;
+        while (training_athleteList.size() > i) {
+            Training_athlete training_athlete = training_athleteList.get(i);
+            cv.put(DBHelper.KEY_ID_ATHLETE, training_athlete.getAthlete_id());
+            cv.put(DBHelper.KEY_ID_TRAINING, trainingID);
+            i++;
+        }
+    }
+
     public void updateAthleteCount(int id) {
 
     }

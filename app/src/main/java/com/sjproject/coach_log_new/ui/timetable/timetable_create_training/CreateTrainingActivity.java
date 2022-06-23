@@ -76,6 +76,7 @@ public class CreateTrainingActivity extends AppCompatActivity {
                         training_athleteList);
                 else Toast.makeText(v.getContext(), "Недостаточно оплаченных занятий",
                         Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });

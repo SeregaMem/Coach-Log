@@ -2,12 +2,14 @@ package com.sjproject.coach_log_new.ui.statistic;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,15 +22,22 @@ import com.sjproject.coach_log_new.object.Subscription;
 import com.sjproject.coach_log_new.object.Training;
 import com.sjproject.coach_log_new.object.Training_athlete;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StatisticFragment extends Fragment implements View.OnClickListener {
 
     private FragmentStatisticBinding binding;
     private Calendar calendar = Calendar.getInstance();
 
+    SimpleDateFormat myformat_date = new SimpleDateFormat("dd/MM/yyyy");
     private List<Athletes> athletesList = new ArrayList<>();
     private List<Subscription> subscriptionList = new ArrayList<>();
     private List<Training> trainingList = new ArrayList<>();
@@ -37,7 +46,7 @@ public class StatisticFragment extends Fragment implements View.OnClickListener 
     private DataBaseAdapter dataBaseAdapter;
 
     private Button btn_create_statistic, btn_start_period, btn_finish_period;
-    private TextView tv_sum_number, tv_training_count;
+    private TextView tv_sum_number, tv_training_count, tv_max_athletes_count;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +63,7 @@ public class StatisticFragment extends Fragment implements View.OnClickListener 
 
         tv_sum_number = binding.tvSumNumber;
         tv_training_count = binding.tvTrainingCountNumber;
+        tv_max_athletes_count = binding.tvMaxAthletesCountNumber;
 
         dataBaseAdapter = new DataBaseAdapter(getActivity());
 
@@ -128,71 +138,81 @@ public class StatisticFragment extends Fragment implements View.OnClickListener 
 
     private void getStatistic() {
         String start_date_string = btn_start_period.getText().toString();
-        String [] start_dateParts = start_date_string.split("/");
-        String start_days_string = start_dateParts[0];
-        int start_days = Integer.parseInt(start_days_string);
-        String start_month_string = start_dateParts[1];
-        int start_month = Integer.parseInt(start_month_string);
-        String start_year_string = start_dateParts[2];
-        int start_year = Integer.parseInt(start_year_string);
-
         String finish_date_string = btn_finish_period.getText().toString();
-        String [] finish_dateParts = finish_date_string.split("/");
-        String finish_days_string = finish_dateParts[0];
-        int finish_days = Integer.parseInt(finish_days_string);
-        String finish_month_string = finish_dateParts[1];
-        int finish_month = Integer.parseInt(finish_month_string);
-        String finish_year_string = finish_dateParts[2];
-        int finish_year = Integer.parseInt(finish_year_string);
+
+        Date start_date = new Date(), finish_date = new Date();
+
+        try {
+            start_date = myformat_date.parse(start_date_string);
+            finish_date = myformat_date.parse(finish_date_string);
+        } catch (ParseException e) {
+            Toast.makeText(getActivity(), "" + e, Toast.LENGTH_LONG).show();
+        }
 
         athletesList = dataBaseAdapter.getAllAthlete();
         trainingList = dataBaseAdapter.getAllTraining();
         training_athleteList = dataBaseAdapter.getAllTrainingAthlete();
         subscriptionList = dataBaseAdapter.getAllSubscription();
 
+        getPriceStatistic(start_date, finish_date);
+
+        getTrainingCount(start_date, finish_date);
+    }
+
+    private void getPriceStatistic(Date start, Date finish) {
         int i = 0;
         int sum = 0;
-
+        tv_sum_number.setText("" + 0);
         while (subscriptionList.size() > i) {
             Subscription  subscription = subscriptionList.get(i);
-            String finish_date_sub = subscription.getDate_finish();
+            String buy_date_sub_string = subscription.getBuy_date();
 
-            String [] dateParts = finish_date_sub.split("/");
-            String getDays = dateParts[0];
-            int sub_days = Integer.parseInt(getDays);
-            String getMonth = dateParts[1];
-            int sub_month = Integer.parseInt(getMonth);
+            Date buy_date_sub;
 
-            if ((start_month <= sub_month) && (start_days <= sub_days) && (finish_month >= sub_month)) {
-                sum += subscription.getPrice();
+            try {
+                buy_date_sub = myformat_date.parse(buy_date_sub_string);
+            } catch (ParseException e) {
+                Toast.makeText(getActivity(), "" + e, Toast.LENGTH_LONG).show();
+                break;
             }
 
+            if ((buy_date_sub.after(start)) && (buy_date_sub.before(finish))) {
+                sum += subscription.getPrice();
+            }
             i++;
         }
         tv_sum_number.setText("" + sum);
+    }
 
-        i = 0;
+    private void getTrainingCount(Date start, Date finish) {
+        int i = 0;
         int training_count = 0;
+        int max_count_athletes = 0;
         while (trainingList.size() > i) {
             Training training = trainingList.get(i);
             String training_date = training.getDate();
 
-            String [] dateParts = training_date.split("/");
-            String getTrainingDay = dateParts[0];
-            int trainingDay = Integer.parseInt(getTrainingDay);
-            String getTrainingMonth = dateParts[1];
-            int trainingMonth = Integer.parseInt(getTrainingMonth);
-            String getTrainingYear = dateParts[2];
-            int trainingYear = Integer.parseInt(getTrainingYear);
+            Date  date = new Date();
+            try {
+                date = myformat_date.parse(training_date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            if ((trainingMonth >= start_month) && (trainingMonth <= finish_month)) {
+            if ((date.after(start)) && (date.before(finish))) {
                 training_count ++;
+            }
+
+            int count = training.getAthlete_count();
+            if (count > max_count_athletes) {
+                max_count_athletes = count;
             }
             i++;
         }
         tv_training_count.setText("" + training_count);
-    }
 
+        tv_max_athletes_count.setText("" + max_count_athletes);
+    }
 
     @Override
     public void onDestroyView() {
